@@ -55,8 +55,28 @@ flowchart TD
 
 ---
 
+## 🤖 Generative AI Suite
+
+The backend features a fully integrated Generative AI subsystem orchestrated via **LangChain**, utilizing LLMs (Gemini / GPT) and speech/audio pipelines:
+
+- **💬 Real-Time Streaming Assistant**: Processes prompts asynchronously and streams responses token-by-token back to the client via Socket.IO and Redis Pub/Sub, providing a low-latency ChatGPT-like experience.
+- **🖼 Multimodal Image Input**: Analyzes attached images for visual reasoning by converting local files to base64 inline before feeding them into multimodal vision models.
+- **🔌 Agentic Tool Calling (Function Calling)**: Empowered with LangChain tool bindings to dynamically choose and run tools:
+  - `Calculator`: Computes math equations natively using `mathjs`.
+  - `Weather`: Provides current mock weather details based on location queries.
+  - `Web Search`: Interfaces with search endpoints (like Tavily) to inject real-time web facts into the conversation.
+- **📚 Retrieval-Augmented Generation (RAG)**: Users can upload PDF documents per chat. The backend parses the PDF (using `pdf-parse`), chunks it, generates embeddings, and queries this vector store to inject relevant context into the LLM's replies.
+- **📐 Mathematical Local Vector Similarity Fallback**: To support offline and local database scenarios, the service implements a native mathematical **Cosine Similarity** matching engine. It automatically falls back to comparing vectors in memory if MongoDB Atlas Vector Search index is unavailable.
+- **🔍 Semantic Chat Search**: Searches chat history semantically by converting queries into embedding vectors and running similarity matching on past messages (meaning-based search instead of strict word matching).
+- **📝 Chat Summarization**: An offline task queue compiles chat transcript fragments and calls the LLM to generate a structured 3-bullet-point conversation summary, saving it directly to the chat's metadata.
+- **🎙 Speech-to-Text Voice Notes (Whisper)**: Accepts voice uploads (wav/mp3) and transcribes audio to text using OpenAI Whisper.
+- **🔊 Text-to-Speech Voice Assistant (TTS)**: Converts the AI agent's textual response back into a playable audio note (.mp3) using OpenAI TTS, allowing end-to-end voice-only conversations.
+
+---
+
 ## ⚡ Key Features
 
+- **🤖 Context-Aware AI Copilot**: Fully-featured conversational assistant (RAG, Tool Calling, Semantic Search, Summarization, and Audio Synthesis).
 - **📞 WebRTC Voice & Video Calling**: Real-time signaling relay with active call locks, busy indicators, receiver offline detection, and fallback systems.
 - **💬 Real-Time Messaging & Chat Rooms**: 1-to-1 and Group chats with typing indicators, soft delete (self/everyone), forward, reply, and star actions.
 - **👥 Group Management**: Dynamic member management (add/remove users) and pinned messages.
@@ -69,7 +89,6 @@ flowchart TD
 
 ---
 
-
 ## 🛠 Tech Stack
 
 - **Runtime**: Node.js (ES Modules)
@@ -77,6 +96,8 @@ flowchart TD
 - **Database**: MongoDB (Mongoose ODM)
 - **In-Memory Store & Adapter**: Redis & `@socket.io/redis-adapter`
 - **Real-Time Communication**: Socket.io
+- **AI & Orchestration**: LangChain Core, `@langchain/google-genai` (Gemini-1.5-Flash), and `@langchain/openai` (GPT-4o-mini)
+- **Vector Embeddings & Audio Processing**: OpenAI Embeddings, Whisper-1 (Speech-to-Text), and TTS-1 (Text-to-Speech)
 - **Media Processing**: Sharp & Multer
 - **Task Queue**: BullMQ
 - **Authentication**: JSON Web Tokens (JWT) with HTTP-only cookies

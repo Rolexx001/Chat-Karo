@@ -58,7 +58,14 @@ const messageSchema=new mongoose.Schema({
         type:mongoose.Schema.Types.ObjectId,
         ref:"Chat",
     },
-
+    isAI:{
+        type:Boolean,
+        default:false,
+    },
+    embedding:{
+        type:[Number],
+        default:undefined,
+    },
 },{timestamps:true});
 
 messageSchema.index({ chatId: 1, createdAt: -1 });

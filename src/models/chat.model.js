@@ -35,6 +35,10 @@ const chatSchema=new mongoose.Schema({
         type:String,
         default:"",
     },
+    summary:{
+        type:String,
+        default:"",
+    },
 },{timestamps:true});
 
 export default mongoose.model("Chat",chatSchema);

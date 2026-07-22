@@ -4,10 +4,11 @@ import { redis } from "../config/redis.js";
 
 const CHANNEL="NOTIFICATION";
 const SESSION_CHANNEL="SESSION_REVOCATION";
+const AI_STREAM_CHANNEL="AI_STREAM";
 
 export const initNotificationSubscriber=async()=>{
-    //Subscribe to notification & session channels
-    await sub.subscribe(CHANNEL, SESSION_CHANNEL);
+    //Subscribe to notification, session, and AI stream channels
+    await sub.subscribe(CHANNEL, SESSION_CHANNEL, AI_STREAM_CHANNEL);
     //Listen for messages on the channels
     sub.on("message",async(channel,message)=>{
         if(channel === CHANNEL) {
@@ -24,6 +25,14 @@ export const initNotificationSubscriber=async()=>{
                     socketObj.emit("SessionRevoked", { message: "Your session has been revoked." });
                     socketObj.disconnect(true);
                 }
+            }
+        } else if(channel === AI_STREAM_CHANNEL) {
+            try {
+                const data = JSON.parse(message);
+                // Emit the chunk to the chat room
+                io.to(data.chatId).emit("ReceiveAIChunk", data);
+            } catch (err) {
+                console.error("Error processing AI stream message:", err);
             }
         }
     });

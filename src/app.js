@@ -9,6 +9,7 @@ import notificationRoutes from './modules/notification/notification.routes.js';
 import userRoutes from './modules/user/user.routes.js';
 import statusRoutes from './modules/status/status.routes.js';
 import callRoutes from './modules/call/call.routes.js';
+import aiRoutes from './modules/ai/ai.routes.js';
 import { errorHandler } from './middleware/error.middleware.js';
 import { apiLimiter } from './middleware/rateLimit.middleware.js';
 
@@ -30,6 +31,7 @@ app.use("/api/notification", notificationRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api/status", statusRoutes);
 app.use("/api/call", callRoutes);
+app.use("/api/ai", aiRoutes);
 app.use("/uploads", express.static("uploads"));
 
 app.use(errorHandler);

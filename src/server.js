@@ -10,6 +10,7 @@ import { pub, sub } from './config/redisPubSub.js';
 import { initNotificationSubscriber } from './services/notification.subscriber.js';
 import './jobs/notification.worker.js';
 import './jobs/media.worker.js';
+import './jobs/ai.worker.js';
 
 
 
