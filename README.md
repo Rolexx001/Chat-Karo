@@ -2,6 +2,8 @@
 
 > A modern, real-time messaging, WebRTC calling, and AI-powered collaboration platform built with React, Node.js, Express, Socket.IO, MongoDB, Redis, and Google Gemini AI.
 
+🌐 **Live Demo:** [https://chat-karo-blond.vercel.app/](https://chat-karo-blond.vercel.app/)
+
 ---
 
 ## ✨ Features Overview
@@ -9,7 +11,7 @@
 ### 1. 💬 Real-Time Messaging & Chat
 - **1-on-1 & Group Chats**: Seamlessly start direct conversations or create active group chats.
 - **Instant Message Delivery**: Powered by WebSockets (Socket.IO) for instant message delivery without reloading.
-- **Message Delivery Status**: 
+- **Message Delivery Status**:
   - ✓ **Single Tick**: Message sent to the server.
   - ✓✓ **Double Grey Ticks**: Delivered to recipient.
   - ✓✓ **Double Blue Ticks**: Read/Seen by the recipient.
@@ -97,26 +99,32 @@
 
 ### 1. Start MongoDB & Redis
 Make sure MongoDB and Redis are running locally, or start them using Docker:
+
 ```bash
 cd backend
 docker-compose up -d
 ```
 
 ### 2. Start the Backend Server
+
 ```bash
 cd backend
 npm install
 npm run dev
 ```
+
 > The backend runs on `http://localhost:5000`
 
 ### 3. Start the Frontend App
+
 In a new terminal window:
+
 ```bash
 cd frontend
 npm install
 npm run dev
 ```
+
 > Open `http://localhost:5173` in your browser.
 
 ---
@@ -146,4 +154,5 @@ TAVILY_API_KEY=
 ---
 
 ## 📄 License
+
 This project is open-source and available under the [ISC License](LICENSE).
