@@ -1,4 +1,4 @@
-# PulseChat — Frontend Client
+# ChatKaro — Frontend Client
 
 A high-performance real-time messaging application frontend built with **React**, **Vite**, **Tailwind CSS**, **Zustand**, and **Socket.IO**. Fully integrated with the PulseChat Node.js + MongoDB + Redis + Groq AI backend.
 
