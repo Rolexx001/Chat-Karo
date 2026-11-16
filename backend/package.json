@@ -1,0 +1,51 @@
+{
+  "name": "chat-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon src/server.js",
+    "start": "node src/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "load-test:seed": "node tests/load/seed.js",
+    "load-test:http": "artillery run tests/load/http-scenarios.yml --output tests/load/http-report.json && artillery report tests/load/http-report.json --output tests/load/http-report.html",
+    "load-test:socket": "artillery run tests/load/socket-scenarios.yml --output tests/load/socket-report.json && artillery report tests/load/socket-report.json --output tests/load/socket-report.html",
+    "load-test:cleanup": "node tests/load/cleanup.js",
+    "load-test:all": "npm run load-test:seed && npm run load-test:http && npm run load-test:socket && npm run load-test:cleanup"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "@langchain/community": "^1.1.29",
+    "@langchain/core": "^1.2.3",
+    "@langchain/google-genai": "^2.2.0",
+    "@langchain/groq": "^1.0.0",
+    "@socket.io/redis-adapter": "^8.3.0",
+    "bcryptjs": "^3.0.3",
+    "bullmq": "^5.77.3",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.6",
+    "dotenv": "^17.3.1",
+    "express": "^4.21.2",
+    "express-rate-limit": "^6.11.2",
+    "groq-sdk": "^0.15.0",
+    "ioredis": "^5.10.1",
+    "jsonwebtoken": "^9.0.3",
+    "lodash.debounce": "^4.0.8",
+    "mathjs": "^15.2.0",
+    "mime-types": "^2.1.35",
+    "mongoose": "^9.3.1",
+    "multer": "^1.4.5-lts.1",
+    "pdf-parse": "^2.4.5",
+    "rate-limit-redis": "^3.0.2",
+    "sharp": "^0.33.0",
+    "socket.io": "^4.8.3",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "artillery": "^2.0.33",
+    "nodemon": "^3.1.14"
+  }
+}
